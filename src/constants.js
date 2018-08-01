@@ -1,10 +1,5 @@
 const constants = {
-    INPUT_NUMBER: "INPUT_NUMBER",
-    ADD: "ADD",
-    DIVIDE: "DIVIDE",
-    MULTIPLY: "MULTIPLY",
-    SUBTRACT: "SUBTRACT",
-    CLEAR: "CLEAR"
+    INPUT_NUMBER: "INPUT_NUMBER"
 }
 
 export default constants
