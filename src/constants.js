@@ -1,5 +1,8 @@
 const constants = {
-    INPUT_NUMBER: "INPUT_NUMBER"
+    ADD_VALUE: "ADD_VALUE",
+    UPDATE_HISTORY: "UPDATE_HISTORY",
+    RESET_HISTORY: "RESET_HISTORY",
+    CALCULATE_HISTORY: "CALCULATE_HISTORY"
 }
 
 export default constants

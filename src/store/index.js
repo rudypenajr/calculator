@@ -6,9 +6,9 @@ import { createStore, applyMiddleware } from 'redux'
 const consoleMessages = store => next => action => {
 
 	let result
-
+	console.log('store:', store)
 	console.groupCollapsed(`dispatching action => ${action.type}`)
-	console.log('history', store.getState().history)
+	console.log('store.getState() ===> ', store.getState())
 	result = next(action)
 
 	let { history, input, output } = store.getState()
@@ -22,7 +22,6 @@ const consoleMessages = store => next => action => {
 	`)
 
 	console.groupEnd()
-
 	return result
 
 }

@@ -12,6 +12,7 @@ module.exports = {
         contentBase: './dist',
         port: 3000
     },
+    devtool: 'eval-source-map',
     module: {
         loaders: [
             {
