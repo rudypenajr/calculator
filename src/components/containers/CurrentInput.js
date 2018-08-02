@@ -3,7 +3,7 @@ import CurrentInput from '../ui/CurrentInput'
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
-    input: state.input
+    input: state.current
 })
 
 export default connect(mapStateToProps)(CurrentInput)

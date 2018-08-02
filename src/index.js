@@ -17,14 +17,12 @@ const initialState = (localStorage["redux-store"]) ?
 const saveState = () => 
     localStorage["redux-store"] = JSON.stringify(store.getState())
 
-const handleError = error => {
-	store.dispatch(
-		addError(error.message)
-	)
-}
+// const historyStatus = () => 
+//     console.log("history: ", store.getState().history)
 
 const store = storeFactory(initialState)
 store.subscribe(saveState)
+// store.subscribe(historyStatus)
 
 window.React = React
 window.store = store

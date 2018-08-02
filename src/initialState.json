@@ -1,4 +1,8 @@
 {
-    "history": ["1", "+", "2"],
-    "current": 0
+    "history": ["1", "+ ", "2"],
+    "current": 0,
+    "previous": 0,
+    "currentSign": "pos",
+    "evaluate": false
+
 }

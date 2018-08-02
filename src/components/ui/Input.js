@@ -1,17 +1,18 @@
 import React from 'react'
 // import '../../stylesheets/Input.scss'
 
-const Input = ({key, action, cs, value, onSelection}) => {
-    // console.log(onSelection)
-    const handleClick = function(e) {
+const Input = ({onSelection, history, action, cs, value}) => {
+    const handleClick = e => {
         e.preventDefault()
-        e.stopPropagation()
 
-        onSelection(e.target.value)
+        debugger;
+        const value = e.target.textContent
+        const previous = history[history.length - 1]
+        onSelection(value, previous)
     }
 
     return (
-        <div key={key} id={action} className={cs} onClick={handleClick}>
+        <div id={action} className={cs} onClick={handleClick}>
             {value}
         </div>
     )

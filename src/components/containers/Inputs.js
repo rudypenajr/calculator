@@ -1,14 +1,24 @@
 import React from 'react'
 import Inputs from '../ui/Inputs'
 import { connect } from 'react-redux';
-import { setInput } from '../../actions'
+import { handleSelection } from '../../actions'
 
-const mapStateToProps = (state, props) =>  ({})
+const mapStateToProps = (state, props) =>  {
+    debugger;
+    const operators = ["+", "-", "*", "/"]
+    const last = state.history[state.history.length - 1]
+    const mustBeInteger = operators.includes(last)
+
+    return {
+        history: state.history,
+        mustBeInteger,
+    }
+}
 
 const mapDispatchToProps = dispatch => ({
-    onSelection({value}) {
+    onSelection(value, previous) {
         dispatch(
-            setInput(value)
+            handleSelection(value, previous)
         )
     }
 })
