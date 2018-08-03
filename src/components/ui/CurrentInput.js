@@ -6,7 +6,7 @@ const CurrentInput = ({input}) => {
     return (
         <div className="container is-fluid has-text-right">
             <div id="display" className="input__current">
-                <p>{input}</p>
+                <p className="is-size-7">{input}</p>
             </div>
         </div>
     )

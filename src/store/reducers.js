@@ -11,7 +11,6 @@ export const history = (state=[], action) => {
 		case C.RESET_HISTORY: 
 			return []
 		case C.CALCULATE_HISTORY:
-			debugger;
 			// [...state, action.payload]
 			return [...state].concat(action.payload)
 		default:

@@ -1,10 +1,6 @@
 import C from './constants'
 import { add, subtract, divide, multiply } from "./helpers"
 
-// const isOperator = /[x/+‑]/
-// const endsWithOperator = /[x+‑/]$/
-
-
 export const addHistory = (value) => ({
     type: C.ADD_HISTORY,
     payload: value
@@ -47,8 +43,8 @@ export const evaluated = evaluated => ({
 
 export const handleSelection = (value, previous) => dispatch => {
     let update = value
-    const isOperator = /[x/+‑]/.test(value)
-    
+    const isOperator = /[x/+-]/.test(value)
+
     if (isOperator) {
         update = " " + value + " "
     } 
@@ -73,8 +69,8 @@ export const handleEvaluation = (history) => dispatch => {
     
     // use reduce to total all values
     let total = [...history].reduce(function(accumulator, currentValue, currentIndex) {
-        const isOperator = /[x/+‑]/.test(currentValue)
-        console.log('current index:', currentIndex)
+        const isOperator = /[x/+-]/.test(currentValue)
+        debugger;
         if (isOperator) {
             switch(currentValue) {
                 case " - ":

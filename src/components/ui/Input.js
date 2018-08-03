@@ -39,9 +39,9 @@ const Input = ({onSelection, history, id, value}) => {
     }
 
     return (
-        <div id={id} className={cs} onClick={handleClick}>
+        <button id={id} className={cs} onClick={handleClick}>
             {value}
-        </div>
+        </button>
     )
 
 }

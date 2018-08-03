@@ -7,7 +7,7 @@ const InputHistory = ({history}) => {
     return (
         <div className="container is-fluid has-text-right">
             <div className="input__history">
-                <p className="is-size-4">{history}</p>
+                <p className="is-size-7">{history}</p>
             </div>
         </div>
     )
