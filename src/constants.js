@@ -6,7 +6,7 @@ const constants = {
     RESET_CURRENT: "RESET_CURRENT",
     ADD_PREVIOUS: "ADD_PREVIOUS",
     ADD_CURRENT_SIGN: "ADD_CURRENT_SIGN",
-    EVALUATE: "EVALUATE"
+    EVALUATED: "EVALUATED"
 }
 
 export default constants

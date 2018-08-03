@@ -11,8 +11,9 @@ export const history = (state=[], action) => {
 		case C.RESET_HISTORY: 
 			return []
 		case C.CALCULATE_HISTORY:
-			const reducer = (accumulator, currentValue) => accumulator + currentValue;
-			return state.reduce(reducer)
+			debugger;
+			// [...state, action.payload]
+			return [...state].concat(action.payload)
 		default:
 			return state
 	}
@@ -72,5 +73,6 @@ export default combineReducers({
 	history,
 	current,
 	previous,
-	sign
+	sign,
+	evaluated
 })

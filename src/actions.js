@@ -1,4 +1,5 @@
 import C from './constants'
+import { add, subtract, divide, multiply } from "./helpers"
 
 // const isOperator = /[x/+‑]/
 // const endsWithOperator = /[x+‑/]$/
@@ -13,8 +14,9 @@ export const clearHistory = () => ({
     type: C.RESET_HISTORY
 })
 
-export const calculateHistory = () => ({
-    type: C.CALCULATE_HISTORY
+export const calculateHistory = (total) => ({
+    type: C.CALCULATE_HISTORY,
+    payload: total
 })
 
 export const addCurrent = value => {
@@ -25,7 +27,7 @@ export const addCurrent = value => {
 }
 
 export const resetCurrent = () => ({
-    type: C.RESET_HISTORY
+    type: C.RESET_CURRENT
 })
 
 export const addPrevious = previous => ({
@@ -39,7 +41,7 @@ export const addCurrentSign = sign => ({
 })
 
 export const evaluated = evaluated => ({
-    type: C.EVALUATE,
+    type: C.EVALUATED,
     payload: evaluated
 })
 
@@ -56,9 +58,57 @@ export const handleSelection = (value, previous) => dispatch => {
     dispatch(addPrevious(previous))
 }
 
+export const handleClear = () => dispatch => {
+    dispatch(clearHistory())
+    dispatch(resetCurrent())
+    dispatch(evaluated(false))
+}
+
 export const handleEvaluation = (history) => dispatch => {
-    debugger;
-    // dispatch(addHistory(0))
-    // dispatch(addCurrent(0))
+    if (history.length === 0) dispatch(evaluated(false))
+
+    // set variables to define operator action
+    let addition, subtraction, multiplication, division;
+    addition = subtraction = multiplication = division =  false;
+    
+    // use reduce to total all values
+    let total = [...history].reduce(function(accumulator, currentValue, currentIndex) {
+        const isOperator = /[x/+‑]/.test(currentValue)
+        console.log('current index:', currentIndex)
+        if (isOperator) {
+            switch(currentValue) {
+                case " - ":
+                    subtraction = true
+                    addition = division = multiplication = false
+                    break;
+                case " / ":
+                    division = true
+                    addition = subtraction = multiplication = false
+                    break;
+                case " x ":
+                    multiplication = true
+                    addition = subtraction = division = false
+                    break;
+                default:
+                    addition = true
+                    subtraction = division = multiplication = false
+                    break;
+            }
+
+            // return accumulator if operator
+            return accumulator
+        }
+
+        if (currentIndex === 0) return parseInt(currentValue)
+
+        // else return function
+        if (addition) return add(accumulator, currentValue)
+        if (subtraction) return subtract(accumulator, currentValue)
+        if (division) return divide(accumulator, currentValue)
+        if (multiplication) return multiply(accumulator, currentValue)
+    }, 0);
+
+    dispatch(calculateHistory( [" = ", total.toString()] ))
+    dispatch(resetCurrent(total))
     dispatch(evaluated(true))
 }
