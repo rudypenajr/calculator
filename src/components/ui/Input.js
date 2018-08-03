@@ -8,6 +8,8 @@ const CLASSES = [
     'is-size-5'
 ]
 
+const DECIMAL = "."
+
 const Input = ({onSelection, history, id, value}) => {
     const _history = history
 
@@ -17,10 +19,13 @@ const Input = ({onSelection, history, id, value}) => {
         const value = e.target.textContent
         const previous = history[history.length - 1]
 
+        if (value === DECIMAL && previous === DECIMAL) return
+
+        debugger;
         if (id === "equals") {
             onSelection(_history)
         } else {
-            onSelection(value, previous)
+            onSelection(value, _history)
         }
     }
 

@@ -41,7 +41,10 @@ export const evaluated = evaluated => ({
     payload: evaluated
 })
 
-export const handleSelection = (value, previous) => dispatch => {
+// TODO: Rather than handle `previous`, pass `history` then get previous
+// With `history`, we can check if equals is there.
+// Does Redux actions have way to check state?
+export const handleSelection = (value, history) => dispatch => {
     let update = value
     const isOperator = /[x/+-]/.test(value)
 
@@ -51,7 +54,7 @@ export const handleSelection = (value, previous) => dispatch => {
 
     dispatch(addHistory(update))
     dispatch(addCurrent(update))
-    dispatch(addPrevious(previous))
+    dispatch(addPrevious(history[history.length - 1]))
 }
 
 export const handleClear = () => dispatch => {
@@ -67,21 +70,22 @@ export const handleEvaluation = (history) => dispatch => {
     let addition, subtraction, multiplication, division;
     addition = subtraction = multiplication = division =  false;
     
+    let arr = history.split(" ")
     // use reduce to total all values
-    let total = [...history].reduce(function(accumulator, currentValue, currentIndex) {
+    let total = arr.reduce(function(accumulator, currentValue, currentIndex) {
         const isOperator = /[x/+-]/.test(currentValue)
         debugger;
         if (isOperator) {
-            switch(currentValue) {
-                case " - ":
+            switch(currentValue.trim()) {
+                case "-":
                     subtraction = true
                     addition = division = multiplication = false
                     break;
-                case " / ":
+                case "/":
                     division = true
                     addition = subtraction = multiplication = false
                     break;
-                case " x ":
+                case "x":
                     multiplication = true
                     addition = subtraction = division = false
                     break;
@@ -104,7 +108,7 @@ export const handleEvaluation = (history) => dispatch => {
         if (multiplication) return multiply(accumulator, currentValue)
     }, 0);
 
-    dispatch(calculateHistory( [" = ", total.toString()] ))
+    dispatch(calculateHistory( " = " + total ))
     dispatch(resetCurrent(total))
     dispatch(evaluated(true))
 }

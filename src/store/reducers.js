@@ -1,18 +1,14 @@
 import C from '../constants'
 import { combineReducers } from 'redux'
 
-export const history = (state=[], action) => {
+export const history = (state="", action) => {
 	switch (action.type) {
 		case C.ADD_HISTORY:
-			return [
-				...state,
-				historyItem(null, action)
-			]
+			return state + historyItem(null, action)
 		case C.RESET_HISTORY: 
-			return []
+			return ""
 		case C.CALCULATE_HISTORY:
-			// [...state, action.payload]
-			return [...state].concat(action.payload)
+			return state + action.payload
 		default:
 			return state
 	}
@@ -27,10 +23,6 @@ export const historyItem = (state=null, action) =>
 
 
 export const current = (state=0, action) => {
-	// console.log('firing....')
-	// console.log('state: ', state)
-	// console.log('action: ', action)
-	// ADD_CURRENT
 	switch(action.type) {
 		case C.ADD_CURRENT:
 			return action.payload
@@ -62,7 +54,7 @@ export const sign = (state="pos", action) => {
 export const evaluated = (state=false, action) => {
 	switch(action.type) {
 		case C.EVALUATED:
-			return true
+			return action.payload
 		default: 
 			return state
 	}

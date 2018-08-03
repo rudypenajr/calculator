@@ -1,5 +1,5 @@
 {
-    "history": ["1", " + ", "2"],
+    "history": "1.0 + 2.0",
     "current": 0,
     "previous": 0,
     "currentSign": "pos",
