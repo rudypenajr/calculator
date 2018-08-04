@@ -4,7 +4,8 @@
   "description": "A calculator to toy with Redux",
   "main": "./dist",
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "webpack"
   },
   "keywords": [
     "calculator",
