@@ -1,5 +1,5 @@
 import C from './constants'
-import { add, subtract, divide, multiply } from "./helpers"
+import { add, subtract, divide, multiply, rewriteLastValue } from "./helpers"
 
 export const addHistory = (value) => ({
     type: C.ADD_HISTORY,
@@ -13,6 +13,11 @@ export const clearHistory = () => ({
 export const calculateHistory = (total) => ({
     type: C.CALCULATE_HISTORY,
     payload: total
+})
+
+export const rewriteHistory = (history) => ({
+    type: C.REWRITE_HISTORY,
+    payload: history
 })
 
 export const addCurrent = value => {
@@ -44,7 +49,8 @@ export const evaluated = evaluated => ({
 // TODO: Rather than handle `previous`, pass `history` then get previous
 // With `history`, we can check if equals is there.
 // Does Redux actions have way to check state?
-export const handleSelection = (value, history) => dispatch => {
+export const handleSelection = (value, history, alterHistory) => dispatch => {
+    debugger;
     let update = value
     const isOperator = /[x/+-]/.test(value)
 
@@ -52,9 +58,18 @@ export const handleSelection = (value, history) => dispatch => {
         update = " " + value + " "
     } 
 
-    dispatch(addHistory(update))
-    dispatch(addCurrent(update))
-    dispatch(addPrevious(history[history.length - 1]))
+    if (alterHistory) {
+        dispatch(
+            rewriteHistory(
+                rewriteLastValue(value, history)
+            )
+        )
+    } else {
+        dispatch(addHistory(update))
+        dispatch(addCurrent(update))
+    }
+
+    dispatch(addPrevious(value))
 }
 
 export const handleClear = () => dispatch => {

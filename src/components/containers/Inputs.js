@@ -10,9 +10,9 @@ const mapStateToProps = (state, props) =>  {
 }
 
 const mapDispatchToProps = dispatch => ({
-    onSelection(value, history) {
+    onSelection(value, history, alterHistory) {
         dispatch(
-            handleSelection(value, history)
+            handleSelection(value, history, alterHistory)
         )
     },
     onClear() {

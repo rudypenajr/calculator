@@ -9,6 +9,8 @@ export const history = (state="", action) => {
 			return ""
 		case C.CALCULATE_HISTORY:
 			return state + action.payload
+		case C.REWRITE_HISTORY:
+			return action.payload
 		default:
 			return state
 	}

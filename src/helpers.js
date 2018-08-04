@@ -65,3 +65,28 @@ export const multiply = (acc, curr) => {
 
     return a * b
 }
+
+export const getLastIntegerFromHistory = (history) => {
+    const historySplit = history.split(" ")
+    const previousValue = historySplit[historySplit.length - 1]
+    
+    return previousValue.split("")
+}
+
+export const getFirstInteger = (valueInArrayFormat) => {
+    return parseInt(valueInArrayFormat)[0]
+}
+
+export const checkForSubsequentZeros = (value, history) => {
+    const previousValueSplit = getLastIntegerFromHistory( history )
+    const startWithInteger = getFirstInteger( previousValueSplit )
+    
+    return (startWithInteger === 0 && parseInt(value) === 0)
+}
+
+export const rewriteLastValue = (value, history) => {
+    const historySplit = history.split(" ")
+    historySplit[historySplit.length - 1] = value
+    
+    return historySplit.join(" ")
+}
