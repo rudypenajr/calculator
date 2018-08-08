@@ -5,14 +5,15 @@ import { handleClear, handleSelection, handleEvaluation } from '../../actions'
 
 const mapStateToProps = (state, props) =>  {
     return {
-        history: state.history
+        history: state.history,
+        evaluated: state.evaluated
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    onSelection(value, history, alterHistory) {
+    onSelection(value, history, alterHistory, evaluated) {
         dispatch(
-            handleSelection(value, history, alterHistory)
+            handleSelection(value, history, alterHistory, evaluated)
         )
     },
     onClear() {

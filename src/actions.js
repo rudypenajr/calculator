@@ -49,14 +49,14 @@ export const evaluated = evaluated => ({
 // TODO: Rather than handle `previous`, pass `history` then get previous
 // With `history`, we can check if equals is there.
 // Does Redux actions have way to check state?
-export const handleSelection = (value, history, alterHistory) => dispatch => {
+export const handleSelection = (value, history, alterHistory, evaluated) => dispatch => {
     debugger;
     let update = value
     const isOperator = /[x/+-]/.test(value)
 
     if (isOperator) {
         update = " " + value + " "
-    } 
+    }
 
     if (alterHistory) {
         dispatch(
@@ -64,6 +64,10 @@ export const handleSelection = (value, history, alterHistory) => dispatch => {
                 rewriteLastValue(value, history)
             )
         )
+    } else if (evaluated && isOperator) {
+        dispatch(getLastWholeIntegerFromHistory(history))
+        dispatch(addHistory(update))
+        dispatch(addCurrent(update))
     } else {
         dispatch(addHistory(update))
         dispatch(addCurrent(update))
@@ -89,7 +93,7 @@ export const handleEvaluation = (history) => dispatch => {
     // use reduce to total all values
     let total = arr.reduce(function(accumulator, currentValue, currentIndex) {
         const isOperator = /[x/+-]/.test(currentValue)
-        debugger;
+
         if (isOperator) {
             switch(currentValue.trim()) {
                 case "-":

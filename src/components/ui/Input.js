@@ -11,7 +11,7 @@ const CLASSES = [
 
 const DECIMAL = "."
 
-const Input = ({onSelection, history, id, value}) => {
+const Input = ({id, onSelection, history, evaluated, value}) => {
     const _history = history
 
     const handleClick = e => {
@@ -40,7 +40,7 @@ const Input = ({onSelection, history, id, value}) => {
         if (id === "equals") {
             return onSelection(_history)
         } else {
-            return onSelection(value, _history, alterHistory)
+            return onSelection(value, _history, alterHistory, evaluated)
         }
     }
 

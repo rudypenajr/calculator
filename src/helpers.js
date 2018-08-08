@@ -66,9 +66,13 @@ export const multiply = (acc, curr) => {
     return a * b
 }
 
-export const getLastIntegerFromHistory = (history) => {
+export const getLastWholeIntegerFromHistory = (history) => {
     const historySplit = history.split(" ")
-    const previousValue = historySplit[historySplit.length - 1]
+    return historySplit[historySplit.length - 1]
+}
+
+export const getLastIntegerFromHistory = (history) => {
+    const previousValue = getLastWholeIntegerFromHistory(history)
     
     return previousValue.split("")
 }
